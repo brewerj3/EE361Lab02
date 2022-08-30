@@ -54,43 +54,42 @@ return n & MASK_4BITS;
 }
 
 void instr_cycle() {
-    if
-}
-
-{
-int ir = MASK_8BITS & (int) (instr[pc]);
-pc++;
-int opcode = ir >> 5;
-switch(opcode) {
-    case ADD:
-	r[get_bit(ir,4)] = r[get_bit(ir,3)] + r[get_bit(ir,2)];
-        break;
-    case DEC:
-	r[get_bit(ir,4)] = r[get_bit(ir,4)] - get_imm(ir);
-        break;
-    case SET:
-	r[get_bit(ir,4)] = get_imm(ir);
-        break;
-    case JMP:
-	pc = get_imm(ir);
-        break;
-    case JZ:
-	if (r[get_bit(ir,4)] ==0 ) {
-		pc = get_imm(ir);
-	}
-        break;
-    case JNZ:
-	if (r[get_bit(ir,4)] !=0 ) {
-		pc = get_imm(ir);
-	}
-        break;
-    case CALL:
-        break;
-    case RET:
-        break;
-    default:
-	printf("Invalid instruction!\n");
-}
+    int ir = MASK_8BITS & (int) (instr[pc]);
+    pc++;
+    int opcode = ir >> 5;
+    switch(opcode) {
+        case ADD:
+            r[get_bit(ir,4)] = r[get_bit(ir,3)] + r[get_bit(ir,2)];
+            break;
+        case DEC:
+            r[get_bit(ir,4)] = r[get_bit(ir,4)] - get_imm(ir);
+            break;
+        case SET:
+	        r[get_bit(ir,4)] = get_imm(ir);
+            break;
+        case JMP:
+	        pc = get_imm(ir);
+            break;
+        case JZ:
+	        if (r[get_bit(ir,4)] ==0 ) {
+		    pc = get_imm(ir);
+	        }
+            break;
+        case JNZ:
+	        if (r[get_bit(ir,4)] !=0 ) {
+		    pc = get_imm(ir);
+	        }
+            break;
+        case CALL:
+            ra = get_imm(pc);
+            pc = get_imm(ir);
+            break;
+        case RET:
+            pc = get_imm(ra);
+            break;
+        default:
+	    printf("Invalid instruction!\n");
+    }
 }
 
 void run_prog(int sim_time)
@@ -106,26 +105,23 @@ for (int t=0; t<sim_time; t++) {
 }
 }
 
-char set_opcode(int opcode)
-{
-return (char) (opcode << 5);
+char set_opcode(int opcode) {
+    return (char) (opcode << 5);
 }
 
 
-char set_bit(char c, int bit_val, int bit_pos)
-{
-if (bit_val==0) {
-    return c & ((char) (~(1 << bit_pos)));
-}
-else {
-    return c | ((char) (1 << bit_pos));
-}
+char set_bit(char c, int bit_val, int bit_pos) {
+    if (bit_val==0) {
+        return c & ((char) (~(1 << bit_pos)));
+    }
+    else {
+        return c | ((char) (1 << bit_pos));
+    }
 }
 
-char set_imm(char c, int imm)
-{
-char clear_bits = (char) (~15);
-return (c & clear_bits) | ((char) imm);
+char set_imm(char c, int imm) {
+    char clear_bits = (char) (~15);
+    return (c & clear_bits) | ((char) imm);
 }
 
 char instr_typeA(int opcode, int imm)
