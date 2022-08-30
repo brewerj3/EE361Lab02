@@ -12,6 +12,7 @@ unsigned int mult(unsigned int x, unsigned int y) {
         }
         multiplier = multiplier >> 1;
         multiplicand = multiplicand << 1;
+
     }
     return result;
 }
@@ -21,14 +22,20 @@ unsigned int mult2(unsigned int x, unsigned int y) {
     unsigned int multiplicand = x;
     unsigned int multiplier = y;
 
-    for (int i=0; i<32; i++) {
-        if (multiplier&1 == 1) {
+    int i = 0;
+    while ( i<31 ) {
+        if (multiplier & 1 == 1) {
             result = result + multiplicand;
         }
         multiplier = multiplier >> 1;
+        if(multiplier == 0) {
+            printf("Number of Passes: %d\n",i);
+            return result;
+        }
         multiplicand = multiplicand << 1;
-}
-return result;
+        i++;
+    }
+    return result;
 }
 
 unsigned int powMod(unsigned int x, unsigned int p, unsigned int m) {
@@ -41,8 +48,16 @@ unsigned int powMod(unsigned int x, unsigned int p, unsigned int m) {
 
 unsigned int powMod2(unsigned int x, unsigned int p, unsigned int m) {
     unsigned int result = 1;
-    for (int i=0; i<p; i++) {
-        result = (result * x) % m;
+    for (int i=0; i<64; i++) {
+        if((p % 2) == 1) {
+            result = (result * x) % m;
+        }
+        p = p >> 1;
+        if(p == 0) {
+            printf("Passes: %d \n",i);
+            return result;
+        }
+        x = (x * x) % m;
     }
     return result;
 }
