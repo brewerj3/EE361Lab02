@@ -12,7 +12,7 @@ char updateBit(char c, int k, int bitIs1);
 
 void main()
 {
-char value = 0xab;
+char value = 0xbf;
 printf("value =");
 displayBits(value);
 printf("\n");
@@ -34,7 +34,7 @@ position = 1;
 printf("setBit:  Bit %d; Result = ", position);
 displayBits(setBit(value,position));
 printf("\n");
-position = 2;
+position = 6;
 printf("setBit:  Bit %d; Result = ", position);
 displayBits(setBit(value,position));
 printf("\n");
@@ -82,49 +82,46 @@ displayBits(updateBit(value,position,bitIs1));
 printf("\n");
 }
 
-char getBit(char c, int k)
-{
-return '0' + ((c & (1 << k))!=0);
+char getBit(char c, int k) {
+    return '0' + ((c & (1 << k))!=0);
 }
 
-char getBit2(char c, int k)
-{
-char result = c >> k;      /* Shift the bit to position 0 */
-result = result & 1;       /* Mask the bits except bit 0 */
-return '0' + result;       /* Return the bit as a char */
+char getBit2(char c, int k) {
+    char result = c >> k;      /* Shift the bit to position 0 */
+    result = result & 1;       /* Mask the bits except bit 0 */
+    return '0' + result;       /* Return the bit as a char */
 }
 
-char setBit(char c, int k)
-{
-return c | (1 << k);
+char setBit(char c, int k) {
+    return c | (1 << k);
 }
 
-char clearBit(char c, int k)
-{
-return 0; 
+char clearBit(char c, int k) {
+    return c & ~(1 << k);
 }
 	
-char clearMSBitsThroughK(char c, int k)
-{
-char mask = (1<<k)-1;
-return c & mask;
+char clearMSBitsThroughK(char c, int k) {
+    char mask = (1 << k)-1;
+    return c & mask;
 }
 
-char clearLSBitsThroughK(char c, int k)
-{
-return 0;
+char clearLSBitsThroughK(char c, int k) {
+    char mask = ~((1 << (k+1))-1);
+    //printf("mask:%d",mask);
+    return c & mask;
 }
 
-char updateBit(char c, int k, int bitIs1)
-{
-return 0;
+char updateBit(char c, int k, int bitIs1) {
+    if(bitIs1 == 0 ){
+        return c & ~(1 << k);
+    }
+    return c & ~(1 << k);
 }
 
-void displayBits(char c)
-{
-for (int i=0; i<8; i++) {
-    printf("%c",'0'+((c>>(7-i))&1));
-}
+void displayBits(char c) {
+    for (int i=0; i<8; i++) {
+        printf("%c",'0'+((c>>(7-i))&1));
+    }
 }
 
 
