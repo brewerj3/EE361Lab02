@@ -53,7 +53,10 @@ int get_imm(int n)
 return n & MASK_4BITS;
 }
 
-void instr_cycle()
+void instr_cycle() {
+    if
+}
+
 {
 int ir = MASK_8BITS & (int) (instr[pc]);
 pc++;
