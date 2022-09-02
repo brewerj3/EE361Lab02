@@ -11,12 +11,14 @@
  *  operations, and especially no multiply operators.  Use the
  *  algorithm on slide 4 of the Lecture 3-1 slides
  */
-unsigned int multiply(unsigned int x, unsigned int y)
-{
+unsigned int multiply(unsigned int x, unsigned int y) {
     unsigned int product = 0;
-
-    for (int i=0; i<y; i++) {
-        product += x;
+    while(x != 0) {
+        if(x%2 != 0) {
+            product = product + y;
+        }
+        y = y << 1;
+        x = x >> 1;
     }
     return product;
 }
@@ -27,9 +29,13 @@ unsigned int multiply(unsigned int x, unsigned int y)
  * logic, addition, and subtraction operations.  It can be done
  * in a few lines.
  */
-unsigned int isPowerTwo(unsigned int n)
-{
-    return 0;
+unsigned int isPowerTwo(unsigned int n) {
+    //generate mask
+    if(((n-1) & n) != 0) {
+        return 0;
+    }
+
+    return 1;
 }
 
 int main()
