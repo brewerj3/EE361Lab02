@@ -12,15 +12,23 @@ int circ_nand(int in0, int in1)
 }
 
 /* Correct this function */
-int circ_nor(int in0, int in1)
-{
-    return 1;
+int circ_nor(int in0, int in1) {
+    if( (in0 == in1) == 0) {
+        return 1;
+    }
+    else {
+        return 0;
+    }
 }
 
 /* Correct this function */
-int circ_not(int in0)
-{
-    return 1;
+int circ_not(int in0) {
+    if(in0 == 1) {
+        return 0;
+    }
+    else {
+        return 1;
+    }
 }
 
 int circ_xor(int in0, int in1)
