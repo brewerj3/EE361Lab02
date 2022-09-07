@@ -5,10 +5,10 @@
 int machine_next_state(int clock, int prevclock, int state, int reset) {
     if (reset == 1) return 0;
     switch(state) {
-        case 0: return 3;
-        case 1: return 0;
+        case 0: return 2;
+        case 1: return 3;
         case 2: return 1;
-        case 3: return 2;
+        case 3: return 0;
     }
 }
 
