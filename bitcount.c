@@ -35,11 +35,11 @@ int bitcount3(unsigned int n)
 int bitcount4(unsigned int n)
 {
 /* Change these masks */
-    unsigned int mask1 = 0x01111111;
-    unsigned int mask2 = 0x11111111;
-    unsigned int mask3 = 0x11111111;
-    unsigned int mask4 = 0x11111111;
-    unsigned int mask5 = 0x11111111;
+    unsigned int mask1 = 0x10101010;
+    unsigned int mask2 = 0x10101010;
+    unsigned int mask3 = 0x10101010;
+    unsigned int mask4 = 0x10101010;
+    unsigned int mask5 = 0x10101010;
     unsigned int m = n;
     m = (mask1 & m) + (mask1 & (m >> 1));
     m = (mask2 & m) + (mask2 & (m >> 2));
