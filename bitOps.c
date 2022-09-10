@@ -112,10 +112,7 @@ char clearLSBitsThroughK(char c, int k) {
 }
 
 char updateBit(char c, int k, int bitIs1) {
-    if(bitIs1 == 0 ){
-        return c & ~(1 << k);
-    }
-    return c & ~(1 << k);
+    return c & ~(1 << (k-1));
 }
 
 void displayBits(char c) {
