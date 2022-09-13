@@ -22,7 +22,7 @@ int ir;
 int ra;
 
 /* Instruction memory */
-#define PROG_MEM_SIZE 16
+#define PROG_MEM_SIZE 17
 char instr[PROG_MEM_SIZE];
 
 /* Masks */
@@ -33,14 +33,13 @@ void load_prog1();
 void load_prog2();
 void run_prog();
 
-void main()
-{
-printf("Program 1:\n");
-load_prog1();  
-run_prog(20);  /* Simulate for 20 instructions */
-printf("\nProgram 2:\n");
-load_prog2();  
-run_prog(24);  
+void main() {
+    printf("Program 1:\n");
+    load_prog1();
+    run_prog(20);  /* Simulate for 20 instructions */
+    printf("\nProgram 2:\n");
+    load_prog2();
+    run_prog(24);
 }
 
 int get_bit(int n, int bit_pos)
@@ -55,8 +54,10 @@ return n & MASK_4BITS;
 
 void instr_cycle() {
     int ir = MASK_8BITS & (int) (instr[pc]);
+    printf("ir = %i  ",ir);
     pc++;
     int opcode = ir >> 5;
+    printf("opcode = %i\n",opcode);
     switch(opcode) {
         case ADD:
             r[get_bit(ir,4)] = r[get_bit(ir,3)] + r[get_bit(ir,2)];
@@ -72,12 +73,12 @@ void instr_cycle() {
             break;
         case JZ:
 	        if (r[get_bit(ir,4)] ==0 ) {
-		    pc = get_imm(ir);
+                pc = get_imm(ir);
 	        }
             break;
         case JNZ:
 	        if (r[get_bit(ir,4)] !=0 ) {
-		    pc = get_imm(ir);
+                pc = get_imm(ir);
 	        }
             break;
         case CALL:

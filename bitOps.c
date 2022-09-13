@@ -106,7 +106,7 @@ char clearMSBitsThroughK(char c, int k) {
 }
 
 char clearLSBitsThroughK(char c, int k) {
-    char mask = ~((1 << (k+1))-1);
+    char mask = ~((1 << k)-1);
     //printf("mask:%d",mask);
     return c & mask;
 }
