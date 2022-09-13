@@ -115,7 +115,7 @@ char updateBit(char c, int k, int bitIs1) {
     if(bitIs1 == 0 ){
         return c & ~(1 << k);
     }
-    return c & ~(1 << k);
+    return c | ~(1 << k);
 }
 
 void displayBits(char c) {
