@@ -30,3 +30,6 @@ add_executable(reverse_int
 
 add_executable(modexp
         modexp.c)
+
+add_executable(quiz03-1a
+        quiz03-1a.c)

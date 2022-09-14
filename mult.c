@@ -53,7 +53,7 @@ unsigned int powMod2(unsigned int x, unsigned int p, unsigned int m) {
             result = (result * x) % m;
         }
         p = p >> 1;
-        if(p == 0) {
+        if((p == 0)) {
             printf("Passes: %d \n",i);
             return result;
         }
